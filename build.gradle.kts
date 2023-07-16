@@ -18,7 +18,7 @@ val vertxVersion = "4.4.1"
 val junitJupiterVersion = "5.9.1"
 
 val mainVerticleName = "com.xcore.MainVerticle"
-val launcherClassName = "io.vertx.core.Launcher"
+val launcherClassName = "com.xcore.XLauncher"
 
 val watchForChange = "src/**/*"
 val doOnChange = "${projectDir}/gradlew classes"
@@ -71,6 +71,11 @@ dependencies {
   implementation("io.vertx:vertx-rabbitmq-client")
   implementation("io.vertx:vertx-kafka-client")
   implementation("com.ongres.scram:client:2.1")
+  implementation("eu.infomas:annotation-detector:3.0.5")
+  // https://mvnrepository.com/artifact/io.vertx/vertx-auth-jwt
+  implementation("io.vertx:vertx-auth-jwt:4.4.1")
+  implementation("io.netty:netty-resolver-dns-native-macos:4.1.74.Final")
+
   testImplementation("io.vertx:vertx-junit5")
   testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
   compileOnly ("org.projectlombok:lombok:1.18.26")

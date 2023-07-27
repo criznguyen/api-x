@@ -3,8 +3,8 @@ package com.xcore.verticles;
 import com.xcore.base.XVerticle;
 import com.xcore.constants.StatusCode;
 import com.xcore.message.XMessage;
-import com.xcore.tasks.database.PostgresqlOperations;
-import io.vertx.core.Handler;
+import com.xcore.tasks.database.psql.PostgresqlOperations;
+import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
@@ -22,9 +22,9 @@ public class DatabaseVerticle extends XVerticle {
   }
 
   @Override
-  protected void beforeConsume(Handler<Boolean> handler) {
+  protected Future<Boolean> beforeConsume() {
     client = new PostgresqlOperations(vertx, config());
-    handler.handle(true);
+    return super.beforeConsume();
   }
 
   @Override

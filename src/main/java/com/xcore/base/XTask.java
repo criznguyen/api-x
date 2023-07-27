@@ -5,7 +5,7 @@ import com.xcore.message.XMessage;
 import io.vertx.core.*;
 import io.vertx.core.json.JsonObject;
 
-import static com.xcore.constants.EnvKeys.TIMEOUT;
+import static com.xcore.constants.ConfigKeys.TIMEOUT;
 
 public abstract class XTask extends XUnit {
   public XTask(Vertx vertx, JsonObject config) {

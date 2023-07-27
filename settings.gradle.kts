@@ -1,1 +1,1 @@
-rootProject.name = "planner"
+rootProject.name = "xcore"

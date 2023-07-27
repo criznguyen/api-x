@@ -9,7 +9,7 @@ import static com.xcore.constants.Keys.EXCEPTION;
 
 @Builder
 @Data
-public class XMessage {
+public class XMessage extends XObject {
   private StatusCode code;
   private String message;
   private MessageType type;

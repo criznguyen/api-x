@@ -1,16 +1,18 @@
 package com.xcore.route;
 
 import com.xcore.annotation.AnnotationScanner;
-import com.xcore.annotation.RoutePath;
+import com.xcore.annotation.XPath;
 import com.xcore.base.XEndpoint;
+import com.xcore.constants.StatusCode;
+import com.xcore.message.Response;
+import io.vertx.core.Future;
 import io.vertx.core.Handler;
+import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
-import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import lombok.Builder;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,8 @@ import java.util.List;
 public class RootRoute {
   private Vertx vertx;
   private JsonObject config;
-  public void buildRouter(Handler<Router> handler) {
+  public Future<Router> buildRouter() {
+    Promise<Router> promise = Promise.promise();
     Router router = Router.router(vertx);
     this.routes().forEach(route -> {
       try {
@@ -28,15 +31,15 @@ public class RootRoute {
       }
     });
     router.route().handler(routingContext -> {
-      HttpServerResponse response = routingContext.response();
-      response.setStatusCode(404);
-      response.end("Not Found");
+      routingContext.response().setStatusCode(404);
+      routingContext.json(Response.builder().code(StatusCode.NOT_FOUND).message("endpoint is not found!").build());
     });
-    handler.handle(router);
+    promise.complete(router);
+    return promise.future();
   }
 
   private List<XEndpoint> routes() {
-    List<Class<?>> annotatedClasses = AnnotationScanner.scanClassesWithAnnotation("com.xcore.route", RoutePath.class);
+    List<Class<?>> annotatedClasses = AnnotationScanner.scanClassesWithAnnotation("com.xcore.route", XPath.class);
     List<XEndpoint> instances = new ArrayList<>();
 
     for (Class<?> clazz : annotatedClasses) {

@@ -1,4 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.gradle.api.tasks.Exec
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
@@ -8,7 +9,7 @@ plugins {
 }
 
 group = "com.xcore"
-version = "1.0.0-SNAPSHOT"
+version = "latest"
 
 repositories {
   mavenCentral()
@@ -75,6 +76,9 @@ dependencies {
   // https://mvnrepository.com/artifact/io.vertx/vertx-auth-jwt
   implementation("io.vertx:vertx-auth-jwt:4.4.1")
   implementation("io.netty:netty-resolver-dns-native-macos:4.1.74.Final")
+  // https://mvnrepository.com/artifact/com.theokanning.openai-gpt3-java/service
+  implementation("com.theokanning.openai-gpt3-java:service:0.14.0")
+
 
   testImplementation("io.vertx:vertx-junit5")
   testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
@@ -106,4 +110,12 @@ tasks.withType<Test> {
 
 tasks.withType<JavaExec> {
   args = listOf("run", mainVerticleName, "--redeploy=$watchForChange", "--launcher-class=$launcherClassName", "--on-redeploy=$doOnChange")
+}
+
+task("dockerComposeUp", type = Exec::class) {
+  group = "docker"
+  description = "Start Docker Compose"
+  dependsOn("build")
+
+  commandLine("docker-compose", "up")
 }

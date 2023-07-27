@@ -1,4 +1,4 @@
-package com.xcore.tasks.database;
+package com.xcore.tasks.database.psql;
 
 import com.xcore.base.XTask;
 import com.xcore.constants.DbRequestType;
@@ -9,15 +9,16 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.pgclient.PgConnectOptions;
 import io.vertx.pgclient.PgPool;
+import io.vertx.pgclient.pubsub.PgSubscriber;
 import io.vertx.sqlclient.PoolOptions;
 import io.vertx.sqlclient.Row;
 import io.vertx.sqlclient.RowSet;
 import io.vertx.sqlclient.Tuple;
 
 import static com.xcore.constants.DbStatementKeys.*;
-import static com.xcore.constants.EnvKeys.*;
+import static com.xcore.constants.ConfigKeys.*;
 
-public class PostgresqlOperations extends XTask {
+public class PostgresqlOperations extends PgExecutorImpl {
 
   private final PgPool client;
 
@@ -37,7 +38,6 @@ public class PostgresqlOperations extends XTask {
     client = PgPool.pool(vertx, connectOptions, poolOptions);
   }
 
-  @Override
   public Future<JsonObject> execute(JsonObject message) {
     Promise<JsonObject> promise = Promise.promise();
     String sql = message.getString(QUERY);

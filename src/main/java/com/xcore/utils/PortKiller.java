@@ -8,6 +8,7 @@ public class PortKiller {
 
     public static void killProcessOnPort(int port) {
         String os = System.getProperty("os.name").toLowerCase();
+        System.out.printf("os: %s%n", os);
         String processCommand;
         if (os.contains("win")) {
             processCommand = "cmd /c netstat -ano | findstr :" + port;

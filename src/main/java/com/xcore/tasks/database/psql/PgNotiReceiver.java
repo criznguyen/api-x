@@ -11,7 +11,7 @@ public class PgNotiReceiver extends PgExecutorImpl {
   private final PgSubscriber subscriber;
   private PgNotiReceiver(Vertx vertx, JsonObject config) {
     super(vertx, config);
-    subscriber = PgSubscriber.subscriber(vertx, getOptions());
+    subscriber = PgSubscriber.subscriber(vertx, getOptions(config));
   }
 
   public static PgNotiReceiver getInstance(Vertx vertx, JsonObject config) {

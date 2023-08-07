@@ -18,7 +18,7 @@ public class PgNotiSender extends PgExecutorImpl {
     super(vertx, config);
 
     // Configure the connection pool options
-    client = PgPool.pool(vertx, getOptions(), getPoolOptions());
+    client = PgPool.pool(vertx, getOptions(config), getPoolOptions(config));
   }
 
   public static PgNotiSender getInstance(Vertx vertx, JsonObject config) {

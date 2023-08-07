@@ -1,6 +1,6 @@
-package com.xcore.route;
+package com.xcore;
 
-import com.xcore.annotation.XMethod;
+import com.xcore.annotation.XController;
 import com.xcore.annotation.XPath;
 import com.xcore.base.XEndpoint;
 import com.xcore.constants.XHttpMethod;
@@ -12,14 +12,14 @@ import io.vertx.ext.web.RoutingContext;
 
 import static com.xcore.constants.VerticleNames.DB_VERTICLE;
 
-@XPath(value = "/")
+@XController(value = "/")
 public class HomeEndpoint extends XEndpoint {
   public HomeEndpoint(Vertx vertx, JsonObject config) {
     super(vertx, config);
   }
 
-  @Override
-  protected void routingHandle(RoutingContext context) {
+  @XPath()
+  public void get(RoutingContext context) {
     getVertx().eventBus().request(DB_VERTICLE, XMessage.builder().build(), responseData -> {
       if (responseData.succeeded()) {
         context.json(Response.fromMessage((XMessage) responseData.result().body()));
@@ -27,7 +27,7 @@ public class HomeEndpoint extends XEndpoint {
     });
   }
 
-  @XMethod(value = XHttpMethod.POST)
+  @XPath(method = XHttpMethod.POST)
   public void post(RoutingContext context) {
     context.json(Response.builder().build());
   }

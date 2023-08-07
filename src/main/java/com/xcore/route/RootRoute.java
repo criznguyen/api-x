@@ -1,12 +1,11 @@
 package com.xcore.route;
 
 import com.xcore.annotation.AnnotationScanner;
-import com.xcore.annotation.XPath;
+import com.xcore.annotation.XController;
 import com.xcore.base.XEndpoint;
 import com.xcore.constants.StatusCode;
 import com.xcore.message.Response;
 import io.vertx.core.Future;
-import io.vertx.core.Handler;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
@@ -39,7 +38,7 @@ public class RootRoute {
   }
 
   private List<XEndpoint> routes() {
-    List<Class<?>> annotatedClasses = AnnotationScanner.scanClassesWithAnnotation("com.xcore.route", XPath.class);
+    List<Class<?>> annotatedClasses = AnnotationScanner.scanClassesWithAnnotation("/", XController.class);
     List<XEndpoint> instances = new ArrayList<>();
 
     for (Class<?> clazz : annotatedClasses) {

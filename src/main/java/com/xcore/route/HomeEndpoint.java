@@ -1,4 +1,4 @@
-package com.xcore;
+package com.xcore.route;
 
 import com.xcore.annotation.XController;
 import com.xcore.annotation.XPath;

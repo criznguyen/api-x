@@ -7,6 +7,7 @@ import lombok.*;
 
 import static com.xcore.constants.Keys.EXCEPTION;
 
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @Data
 public class XMessage extends XObject {

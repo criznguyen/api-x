@@ -38,7 +38,7 @@ public class RootRoute {
   }
 
   private List<XEndpoint> routes() {
-    List<Class<?>> annotatedClasses = AnnotationScanner.scanClassesWithAnnotation("/", XController.class);
+    List<Class<?>> annotatedClasses = AnnotationScanner.scanClassesWithAnnotation("com.xcore.route", XController.class);
     List<XEndpoint> instances = new ArrayList<>();
 
     for (Class<?> clazz : annotatedClasses) {

@@ -1,8 +1,9 @@
 package com.xcore.base;
 
 import io.vertx.core.Vertx;
-import io.vertx.core.impl.logging.Logger;
-import io.vertx.core.impl.logging.LoggerFactory;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.LoggerContext;
+import org.slf4j.LoggerFactory;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.SharedData;
 import lombok.Getter;
@@ -18,7 +19,6 @@ public abstract class XUnit {
   @Getter
   SharedData sharedData;
 
-  @Getter
   private final Logger logger;
 
 
@@ -26,6 +26,22 @@ public abstract class XUnit {
     this.vertx = vertx;
     this.config = config;
     sharedData = vertx.sharedData();
-    logger = LoggerFactory.getLogger(this.getClass());
+    LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
+
+    // Get the root logger
+    logger = loggerContext.getLogger(Logger.ROOT_LOGGER_NAME);
+    System.out.println("logger class: " + logger.getClass());
+  }
+
+  protected void info(String message) {
+    logger.info(message);
+  }
+
+  protected void error(String message) {
+    logger.info(message);
+  }
+
+  protected void error(String message, Throwable throwable) {
+    logger.error(message, throwable);
   }
 }

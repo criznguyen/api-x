@@ -19,7 +19,7 @@ public abstract class XTask extends XUnit {
     Future<JsonObject> future = this.execute(message);
     future.onSuccess(promise::complete);
     future.onFailure(throwable -> {
-      getLogger().error(throwable);
+      error(throwable.getMessage(), throwable);
       promise.fail(throwable);
     });
     return promise.future();

@@ -79,7 +79,7 @@ dependencies {
   // https://mvnrepository.com/artifact/com.theokanning.openai-gpt3-java/service
 //  implementation("com.theokanning.openai-gpt3-java:service:0.14.0")
   // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
-  implementation("ch.qos.logback:logback-classic:1.4.11")
+  implementation("ch.qos.logback:logback-classic:1.4.14")
 
   testImplementation("io.vertx:vertx-junit5")
   testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")

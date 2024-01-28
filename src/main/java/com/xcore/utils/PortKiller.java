@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class PortKiller {
-
     public static void killProcessOnPort(int port) {
         String os = System.getProperty("os.name").toLowerCase();
         System.out.printf("os: %s%n", os);

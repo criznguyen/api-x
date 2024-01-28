@@ -15,7 +15,7 @@ repositories {
   mavenCentral()
 }
 
-val vertxVersion = "4.4.1"
+val vertxVersion = "4.5.1"
 val junitJupiterVersion = "5.9.1"
 
 val mainVerticleName = "com.xcore.MainVerticle"
@@ -77,7 +77,7 @@ dependencies {
   implementation("io.vertx:vertx-auth-jwt:4.4.1")
   implementation("io.netty:netty-resolver-dns-native-macos:4.1.74.Final")
   // https://mvnrepository.com/artifact/com.theokanning.openai-gpt3-java/service
-  implementation("com.theokanning.openai-gpt3-java:service:0.14.0")
+//  implementation("com.theokanning.openai-gpt3-java:service:0.14.0")
   // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
   implementation("ch.qos.logback:logback-classic:1.4.11")
 
